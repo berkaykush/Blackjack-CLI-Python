@@ -25,6 +25,9 @@ If the dealer and the player both have naturals, the bet of that player is a sta
 ## Running Blackjack:
 
 ```
+git clone https://github.com/berkaykush/Blackjack-CLI-Python.git
+cd Blackjack-CLI-Python
+python code/main.py
 ```
 
 <p align="center">
