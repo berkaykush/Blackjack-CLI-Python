@@ -29,16 +29,9 @@ git clone https://github.com/berkaykush/Blackjack-CLI-Python.git
 cd Blackjack-CLI-Python
 python code/main.py
 ```
-
 <p align="center">
-<video src="" controls="controls" style="max-width: 730px;">
+<video src="https://user-images.githubusercontent.com/70837975/202872474-5b96be52-935d-44a9-9f6c-1fba134a4030.mov" controls="controls" style="max-width: 730px;">
 </video>
-</p>
-
-## Screenshots
-<p align="center">
-<img width=500 src="">
-  <img width=500 src="">
 </p>
 
 ## Author
