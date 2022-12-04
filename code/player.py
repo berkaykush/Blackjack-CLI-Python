@@ -3,7 +3,6 @@ from balance import Balance
 
 
 class Dealer:
-
     def __init__(self, name):
         self._name = name
         self.deck = deck.PlayerDeck()
@@ -13,7 +12,7 @@ class Dealer:
         return self._name
 
     def show_hand(self, hidden):
-        print(f'\n{self._name}\'s Hand:')
+        print(f"\n{self._name}'s Hand:")
         num_cards_to_print = self.deck.get_deck_len()
         curr_card_index = 0
 
@@ -23,14 +22,13 @@ class Dealer:
             else:
                 num_cards_to_print_per_line = deck.MAX_NUM_CARDS_TO_PRINT_PER_LINE
 
-            self.deck.print_deck(
-                hidden, num_cards_to_print_per_line, curr_card_index)
+            self.deck.print_deck(hidden, num_cards_to_print_per_line, curr_card_index)
 
             num_cards_to_print -= num_cards_to_print_per_line
             curr_card_index += num_cards_to_print_per_line
 
     def show_value(self):
-        print(f'{self.get_name}\'s value is: {self.deck.get_value}')
+        print(f"{self.get_name}'s value is: {self.deck.get_value}")
 
 
 class Player(Dealer):
@@ -39,5 +37,4 @@ class Player(Dealer):
         self.balance = Balance(balance)
 
     def show_balance(self):
-        print(f'{self._name} has ' +
-              '{:0.2f}$.\n'.format(self.balance.get_balance))
+        print(f"{self._name} has {self.balance.get_balance:.2f}$.\n")
