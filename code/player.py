@@ -1,40 +1,43 @@
-import deck
+from deck_in_hand import DeckInHand
 from balance import Balance
+import player_input
+from game_logic import clear_terminal, is_busted
 
 
-class Dealer:
-    def __init__(self, name):
-        self._name = name
-        self.deck = deck.PlayerDeck()
+class Player:
+    def __init__(self, name, balance):
+        self.__name = name
+        self.__hand = DeckInHand()
+        self.balance = Balance(balance)
 
     @property
     def get_name(self):
-        return self._name
+        return self.__name
 
-    def show_hand(self, hidden):
-        print(f"\n{self._name}'s Hand:")
-        num_cards_to_print = self.deck.get_deck_len()
-        curr_card_index = 0
+    @property
+    def get_hand(self):
+        return self.__hand
 
-        while num_cards_to_print > 0:
-            if num_cards_to_print < deck.MAX_NUM_CARDS_TO_PRINT_PER_LINE:
-                num_cards_to_print_per_line = num_cards_to_print
-            else:
-                num_cards_to_print_per_line = deck.MAX_NUM_CARDS_TO_PRINT_PER_LINE
+    def play(self, game_deck):
+        print(f"\n{self.__name} is playing.")
 
-            self.deck.print_deck(hidden, num_cards_to_print_per_line, curr_card_index)
+        while not is_busted(self):
+            if player_input.check_user_hit_or_stand_response() == "STAND":
+                break
 
-            num_cards_to_print -= num_cards_to_print_per_line
-            curr_card_index += num_cards_to_print_per_line
+            clear_terminal()
+            self.__hand.add_card(game_deck.remove_first_card())
 
-    def show_value(self):
-        print(f"{self.get_name}'s value is: {self.deck.get_value}")
-
-
-class Player(Dealer):
-    def __init__(self, name, balance):
-        super().__init__(name)
-        self.balance = Balance(balance)
+            self.show_hand(is_hidden=False)
+            self.show_hand_value()
+            print("")
 
     def show_balance(self):
-        print(f"{self._name} has {self.balance.get_balance:.2f}$.\n")
+        print(f"{self.__name} has {self.balance.get:.2f}$.\n")
+
+    def show_hand(self, is_hidden):
+        print(f"\n{self.__name}'s hand:")
+        self.__hand.show_hand(is_hidden)
+
+    def show_hand_value(self):
+        print(f"{self.__name}'s value is: {self.__hand.get_value}")

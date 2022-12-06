@@ -40,115 +40,81 @@ def clear_terminal():
 
 
 def has_blackjack(_):
-    return _.deck.get_value == BLACKJACK
+    return _.get_hand.get_value == BLACKJACK
 
 
 def is_busted(_):
-    return _.deck.get_value > BLACKJACK
+    return _.get_hand.get_value > BLACKJACK
 
 
-def deal_cards(game_deck, player, dealer):
-    print("\nDEALING CARDS:")
-    time.sleep(2)
-
-    for _ in range(0, NUM_CARDS_TO_DEAL):
-        player.deck.add_card(game_deck.remove_first_card())
-        dealer.deck.add_card(game_deck.remove_first_card())
-
-
-def player_playing(player, game_deck):
-    print(f"\n{player.get_name} is playing.")
-
-    while not is_busted(player):
-        if player_input.check_user_hit_or_stand_response() == "STAND":
-            break
-
-        clear_terminal()
-        player.deck.add_card(game_deck.remove_first_card())
-
-        player.show_hand(hidden=False)
-        player.show_value()
-        print("")
-
-
-def dealer_playing(dealer, game_deck):
-    time.sleep(1.5)
-    clear_terminal()
-    print(f"\n{dealer.get_name} is playing.")
-
-    while dealer.deck.get_value < 17:
-        dealer.deck.add_card(game_deck.remove_first_card())
-        time.sleep(2.5)
-
-        dealer.show_hand(hidden=False)
-        dealer.show_value()
-
-
-def play(player, dealer, game_deck):
+def play(player, dealer):
     global round_num
 
     print("")
     player.show_balance()
-    bet = player_input.check_bet(player.balance.get_balance)
+    bet = player_input.check_bet(player.balance.get)
 
     round_num += 1
     clear_terminal()
     print(f"\nROUND {round_num}")
 
-    deal_cards(game_deck, player, dealer)
+    dealer.deal_cards(player)
 
-    dealer.show_hand(hidden=True)
+    dealer.show_hand(is_hidden=True)
     time.sleep(1)
 
-    player.show_hand(hidden=False)
+    player.show_hand(is_hidden=False)
     time.sleep(1)
 
-    player.show_value()
+    player.show_hand_value()
 
     if has_blackjack(player) and not has_blackjack(dealer):
-        print(f"\n{player.get_name} has BLACKJACK.")
-        print(f"{player.get_name} WINS THE ROUND.")
-        player.balance.add_balance(int((3 * bet / 2) + 0.5))
+        print(f"\n{player.get_name.upper()} has BLACKJACK.")
+        print(f"{player.get_name.upper()} WINS THE ROUND.")
+        player.balance.add(int((3 * bet / 2) + 0.5))
         return
 
     if has_blackjack(dealer) and not has_blackjack(player):
-        print(f"\n{dealer.get_name} has BLACKJACK.")
-        print(f"{dealer.get_name} WINS THE ROUND.")
-        player.balance.remove_balance(bet)
+        print("\nDEALER has BLACKJACK.")
+        print("DEALER WINS THE ROUND.")
+        player.balance.remove(bet)
         return
 
     if has_blackjack(player) and has_blackjack(dealer):
-        print(f"\n{player.get_name} and {dealer.get_name} have BLACKJACK.")
+        print(f"\n{player.get_name.upper()} and DEALER both have BLACKJACKS.")
         print("ROUND IS A DRAW.")
         return
 
-    player_playing(player, game_deck)
-    print(f"\n{player.get_name} STANDS.")
+    player.play(dealer.get_game_deck)
+    print(f"\n{player.get_name.upper()} STANDS.")
 
     if is_busted(player):
-        print(f"\n{player.get_name} BUSTS!!!")
-        print(f"{dealer.get_name} WINS THE ROUND.")
-        player.balance.remove_balance(bet)
+        print(f"\n{player.get_name.upper()} BUSTS!!!")
+        print("DEALER WINS THE ROUND.")
+        player.balance.remove(bet)
         return
 
-    dealer_playing(dealer, game_deck)
+    time.sleep(1.5)
+    clear_terminal()
+
+    dealer.play()
     time.sleep(0.5)
-    print(f"\n{dealer.get_name} STANDS.")
+    print("\nDEALER STANDS.")
 
     if is_busted(dealer):
-        print(f"\n{dealer.get_name} BUSTS!!!")
-        print(f"{player.get_name} WINS THE ROUND.")
-        player.balance.add_balance(bet)
+        print("\nDEALER BUSTS!!!")
+        print(f"{player.get_name.upper()} WINS THE ROUND.")
+        player.balance.add(bet)
 
-    elif player.deck.get_value > dealer.deck.get_value:
-        print(f"{player.get_name} HAS GREATER VALUE.")
-        print(f"\n{player.get_name} WINS THE ROUND.")
-        player.balance.add_balance(bet)
+    elif player.get_hand.get_value > dealer.get_hand.get_value:
+        print(f"{player.get_name.upper()} HAS GREATER VALUE.")
+        print(f"\n{player.get_name.upper()} WINS THE ROUND.")
+        player.balance.add(bet)
 
-    elif dealer.deck.get_value > player.deck.get_value:
-        print(f"{dealer.get_name} HAS GREATER VALUE.")
-        print(f"\n{dealer.get_name} WINS THE ROUND.")
-        player.balance.remove_balance(bet)
+    elif dealer.get_hand.get_value > player.get_hand.get_value:
+        print("DEALER HAS GREATER VALUE.")
+        print("\nDEALER WINS THE ROUND.")
+        player.balance.remove(bet)
 
     else:
         print("\nTIE ROUND!!!")
@@ -161,9 +127,16 @@ def reveal_cards(player, dealer):
     print("\nREVEALING THE CARDS:")
     time.sleep(1)
 
-    dealer.show_hand(hidden=False)
-    dealer.show_value()
+    dealer.show_hand(is_hidden=False)
+    dealer.show_hand_value()
     time.sleep(1.5)
 
-    player.show_hand(hidden=False)
-    player.show_value()
+    player.show_hand(is_hidden=False)
+    player.show_hand_value()
+
+
+def reset_game(player, dealer):
+    player.get_hand.reset()
+    dealer.get_hand.reset()
+    dealer.reset_game_deck()
+    clear_terminal()
