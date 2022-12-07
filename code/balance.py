@@ -1,16 +1,16 @@
 class Balance:
-    def __init__(self, balance):
-        self.__balance = balance
+    def __init__(self, funds):
+        self.__funds = funds
 
     @property
-    def get(self):
-        return self.__balance
+    def get_funds(self):
+        return self.__funds
 
-    def add(self, money):
-        self.__balance += money
+    def add_funds(self, money):
+        self.__funds += money
 
-    def remove(self, money):
-        self.__balance -= money
+    def remove_funds(self, money):
+        self.__funds -= money
 
     def is_bankrupt(self):
-        return self.__balance < 50
+        return self.__funds < 50

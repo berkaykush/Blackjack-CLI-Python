@@ -5,10 +5,10 @@ from game_logic import clear_terminal, is_busted
 
 
 class Player:
-    def __init__(self, name, balance):
+    def __init__(self, name, funds):
         self.__name = name
         self.__hand = DeckInHand()
-        self.balance = Balance(balance)
+        self.balance = Balance(funds)
 
     @property
     def get_name(self):
@@ -33,7 +33,7 @@ class Player:
             print("")
 
     def show_balance(self):
-        print(f"{self.__name} has {self.balance.get:.2f}$.\n")
+        print(f"{self.__name} has {self.balance.get_funds:.2f}$.\n")
 
     def show_hand(self, is_hidden):
         print(f"\n{self.__name}'s hand:")

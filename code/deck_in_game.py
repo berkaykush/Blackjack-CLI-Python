@@ -2,7 +2,7 @@ import random
 import card as c
 
 
-class GameDeck:
+class DeckInGame:
     def __init__(self):
         self.__game_deck = []
         self.__fill()

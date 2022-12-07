@@ -1,14 +1,14 @@
 import time
 
 from deck_in_hand import DeckInHand
-from game_deck import GameDeck
+from deck_in_game import DeckInGame
 from game_logic import NUM_CARDS_TO_DEAL
 
 
 class Dealer:
     def __init__(self):
         self.__hand = DeckInHand()
-        self.__game_deck = GameDeck()
+        self.__game_deck = DeckInGame()
 
     @property
     def get_hand(self):
@@ -44,4 +44,4 @@ class Dealer:
         self.__hand.show_hand(is_hidden)
 
     def reset_game_deck(self):
-        self.__game_deck = GameDeck()
+        self.__game_deck = DeckInGame()
