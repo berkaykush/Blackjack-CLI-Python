@@ -40,7 +40,7 @@ class Dealer:
         print(f"Dealer's value is: {self.__hand.get_value}")
 
     def show_hand(self, is_hidden):
-        print("\nDealer's hand:")
+        print("\nDealer's hand:", end="")
         self.__hand.show_hand(is_hidden)
 
     def reset_game_deck(self):

@@ -1,7 +1,7 @@
 from deck_in_hand import DeckInHand
 from balance import Balance
 import player_input
-from game_logic import clear_terminal, is_busted
+from game_logic import clear_terminal
 
 
 class Player:
@@ -21,7 +21,7 @@ class Player:
     def play(self, game_deck):
         print(f"\n{self.__name} is playing.")
 
-        while not is_busted(self):
+        while self.__hand.get_value < 21:
             if player_input.check_user_hit_or_stand_response() == "STAND":
                 break
 
@@ -36,7 +36,7 @@ class Player:
         print(f"{self.__name} has {self.balance.get_funds:.2f}$.\n")
 
     def show_hand(self, is_hidden):
-        print(f"\n{self.__name}'s hand:")
+        print(f"\n{self.__name}'s hand:", end="")
         self.__hand.show_hand(is_hidden)
 
     def show_hand_value(self):
