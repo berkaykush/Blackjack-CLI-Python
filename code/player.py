@@ -28,14 +28,14 @@ class Player:
             clear_terminal()
             self.__hand.add_card(game_deck.remove_first_card())
 
-            self.show_hand(is_hidden=False)
+            self.show_hand()
             self.show_hand_value()
             print("")
 
     def show_balance(self):
         print(f"{self.__name} has {self.balance.get_funds:.2f}$.\n")
 
-    def show_hand(self, is_hidden):
+    def show_hand(self, is_hidden=False):
         print(f"\n{self.__name}'s hand:", end="")
         self.__hand.show_hand(is_hidden)
 

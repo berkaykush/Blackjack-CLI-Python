@@ -63,7 +63,7 @@ def play(player, dealer):
     dealer.show_hand(is_hidden=True)
     time.sleep(1)
 
-    player.show_hand(is_hidden=False)
+    player.show_hand()
     time.sleep(1)
 
     player.show_hand_value()
@@ -127,11 +127,11 @@ def reveal_cards(player, dealer):
     print("\nREVEALING THE CARDS:")
     time.sleep(1)
 
-    dealer.show_hand(is_hidden=False)
+    dealer.show_hand()
     dealer.show_hand_value()
     time.sleep(1.5)
 
-    player.show_hand(is_hidden=False)
+    player.show_hand()
     player.show_hand_value()
 
 

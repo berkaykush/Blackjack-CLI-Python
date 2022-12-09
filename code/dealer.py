@@ -33,13 +33,13 @@ class Dealer:
             self.__hand.add_card(self.__game_deck.remove_first_card())
             time.sleep(2.5)
 
-            self.show_hand(is_hidden=False)
+            self.show_hand()
             self.show_hand_value()
 
     def show_hand_value(self):
         print(f"Dealer's value is: {self.__hand.get_value}")
 
-    def show_hand(self, is_hidden):
+    def show_hand(self, is_hidden=False):
         print("\nDealer's hand:", end="")
         self.__hand.show_hand(is_hidden)
 
