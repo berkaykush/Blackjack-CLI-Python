@@ -1,7 +1,6 @@
-MAX_NUM_CARDS_TO_PRINT_PER_LINE = 3
-
-
 class DeckInHand:
+    MAX_NUM_CARDS_TO_PRINT_PER_LINE = 3
+
     def __init__(self):
         self.__hand = []
         self.__num_aces = 0
@@ -16,7 +15,7 @@ class DeckInHand:
         return len(self.__hand)
 
     @property
-    def get_value(self):
+    def value(self):
         return self.__value
 
     def add_card(self, card):
@@ -28,10 +27,10 @@ class DeckInHand:
         print_from_card_index = 0
 
         while num_cards_to_print > 0:
-            if num_cards_to_print < MAX_NUM_CARDS_TO_PRINT_PER_LINE:
+            if num_cards_to_print < DeckInHand.MAX_NUM_CARDS_TO_PRINT_PER_LINE:
                 num_cards_to_print_per_line = num_cards_to_print
             else:
-                num_cards_to_print_per_line = MAX_NUM_CARDS_TO_PRINT_PER_LINE
+                num_cards_to_print_per_line = DeckInHand.MAX_NUM_CARDS_TO_PRINT_PER_LINE
 
             self.__print_hand(
                 is_hidden, num_cards_to_print_per_line, print_from_card_index
@@ -46,9 +45,9 @@ class DeckInHand:
         self.__num_aces = 0
 
     def __add_card_value(self, card):
-        self.__value += card.get_value
+        self.__value += card.value
 
-        if card.get_rank == "A":
+        if card.rank == "A":
             self.__num_aces += 1
 
         while (self.__num_aces > 0) and (self.__value > 21):
@@ -101,20 +100,20 @@ ___________________    ___________________    ___________________
                 cards = cards.replace("-3", "? ").replace("A", "?")
             else:
                 cards = {
-                    0: cards.replace("A", self.__hand[print_from_card_index].get_suit),
-                    1: cards.replace("B", self.__hand[print_from_card_index].get_suit),
-                    2: cards.replace("C", self.__hand[print_from_card_index].get_suit),
+                    0: cards.replace("A", self.__hand[print_from_card_index].suit),
+                    1: cards.replace("B", self.__hand[print_from_card_index].suit),
+                    2: cards.replace("C", self.__hand[print_from_card_index].suit),
                 }[i]
 
-                if self.__hand[print_from_card_index].get_rank == "10":
+                if self.__hand[print_from_card_index].rank == "10":
                     cards = cards.replace(
                         str(i - 3),
-                        str(self.__hand[print_from_card_index].get_rank),
+                        str(self.__hand[print_from_card_index].rank),
                     )
                 else:
                     cards = cards.replace(
                         str(i - 3),
-                        str(self.__hand[print_from_card_index].get_rank) + " ",
+                        str(self.__hand[print_from_card_index].rank) + " ",
                     )
 
             print_from_card_index += 1

@@ -1,5 +1,5 @@
 import random
-import card as c
+from card import Card
 
 
 class DeckInGame:
@@ -12,9 +12,9 @@ class DeckInGame:
         return self.__game_deck.pop(0)
 
     def __fill(self):
-        for suit in c.SUITS:
-            for rank in c.RANKS:
-                self.__game_deck.append(c.Card(rank, suit))
+        for suit in Card.SUITS:
+            for rank in Card.RANKS:
+                self.__game_deck.append(Card(rank, suit))
 
     def __shuffle(self):
         random.shuffle(self.__game_deck)

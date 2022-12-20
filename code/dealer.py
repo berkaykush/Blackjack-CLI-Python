@@ -11,11 +11,11 @@ class Dealer:
         self.__game_deck = DeckInGame()
 
     @property
-    def get_hand(self):
+    def hand(self):
         return self.__hand
 
     @property
-    def get_game_deck(self):
+    def game_deck(self):
         return self.__game_deck
 
     def deal_cards(self, player):
@@ -23,13 +23,13 @@ class Dealer:
         time.sleep(2)
 
         for _ in range(0, NUM_CARDS_TO_DEAL):
-            player.get_hand.add_card(self.__game_deck.remove_first_card())
+            player.hand.add_card(self.__game_deck.remove_first_card())
             self.__hand.add_card(self.__game_deck.remove_first_card())
 
     def play(self):
         print("\nDealer is playing.")
 
-        while self.__hand.get_value < 17:
+        while self.__hand.value < 17:
             self.__hand.add_card(self.__game_deck.remove_first_card())
             time.sleep(2.5)
 
@@ -37,7 +37,7 @@ class Dealer:
             self.show_hand_value()
 
     def show_hand_value(self):
-        print(f"Dealer's value is: {self.__hand.get_value}")
+        print(f"Dealer's value is: {self.__hand.value}")
 
     def show_hand(self, is_hidden=False):
         print("\nDealer's hand:", end="")

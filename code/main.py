@@ -1,6 +1,5 @@
 import player_input
 from game_logic import (
-    START_BALANCE,
     display_logo,
     display_welcome_message,
     play,
@@ -15,7 +14,7 @@ def main():
     display_logo()
     display_welcome_message()
 
-    player = Player(player_input.check_player_name(), START_BALANCE)
+    player = Player(player_input.check_player_name())
     dealer = Dealer()
 
     playing = True

@@ -1,44 +1,41 @@
-SUITS = ("♥", "♦", "♠", "♣")
-
-RANKS = ("2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A")
-
-CARD_VALUES = {
-    "2": 2,
-    "3": 3,
-    "4": 4,
-    "5": 5,
-    "6": 6,
-    "7": 7,
-    "8": 8,
-    "9": 9,
-    "10": 10,
-    "J": 10,
-    "Q": 10,
-    "K": 10,
-    "A": 11,  # Can be adjusted.
-}
-
-
 class Card:
+    SUITS = ("♥", "♦", "♠", "♣")
+    RANKS = ("2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A")
+    VALUES = {
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 6,
+        "7": 7,
+        "8": 8,
+        "9": 9,
+        "10": 10,
+        "J": 10,
+        "Q": 10,
+        "K": 10,
+        "A": 11,  # Can be adjusted.
+    }
+
     def __init__(self, rank, suit):
         self.__rank = rank
         self.__suit = suit
-        self.__value = CARD_VALUES[self.__rank]
+        self.__value = Card.VALUES[self.__rank]
 
     @property
     def get(self):
         return Card(self.__rank, self.__suit)
 
     @property
-    def get_rank(self):
+    def rank(self):
         return self.__rank
 
     @property
-    def get_suit(self):
+    def suit(self):
         return self.__suit
 
     @property
-    def get_value(self):
+    def value(self):
         return self.__value
 
     def __str__(self):
