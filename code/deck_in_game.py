@@ -4,17 +4,17 @@ from card import Card
 
 class DeckInGame:
     def __init__(self):
-        self.__game_deck = []
+        self.__cards = []
         self.__fill()
         self.__shuffle()
 
     def remove_first_card(self):
-        return self.__game_deck.pop(0)
+        return self.__cards.pop(0)
 
     def __fill(self):
         for suit in Card.SUITS:
             for rank in Card.RANKS:
-                self.__game_deck.append(Card(rank, suit))
+                self.__cards.append(Card(rank, suit))
 
     def __shuffle(self):
-        random.shuffle(self.__game_deck)
+        random.shuffle(self.__cards)
