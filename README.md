@@ -4,23 +4,18 @@
 ![](https://img.shields.io/badge/Python_Version-3.10.5-brown.svg)
 ![](https://img.shields.io/badge/Status-Complete-green.svg)
 
-The command line interface Blackjack game in Python.
+CLI Blackjack game in Python.
+
+The game only allows players to choose between Hit and Stand options.
 <br>
-The only player decisions that have been implemented are Hit and Stand.
+The Insurance option is not available.
 <br>
-Insurance is not implemented.
-<br>
-Dealer hits soft 17.
+Additionally, the dealer will hit on a soft 17.
 <br>
 
-What happens if the player has blackjack but the dealer does not?
+In the case where a player has blackjack but the dealer does not, the dealer will pay the player at a rate of 3 to 2.
 <br>
-If the player has blackjack but the dealer does not, the dealer will pay you 3 to 2.
-
-What happens if the player and the dealer both get blackjack?
-<br>
-If the dealer and the player both have naturals, the bet of that player is a stand-off (a tie), and the player takes back their chips.
-
+If both the player and the dealer have a blackjack, it results in a tie, and the player's bet is returned.
 
 ## Running Blackjack:
 
